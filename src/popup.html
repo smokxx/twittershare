@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<title>Twitter share</title>
+<link rel="stylesheet" href="popup.css" type="text/css">
+<script type="text/javascript" src="options.js"></script>
+<script type="text/javascript" src="twitterutils.js"></script>
+<script type="text/javascript" src="popup.js"></script>
+</head>
+<body onload="init();">
+
+<div id="commonForm" style="display: none; width: 100px;">
+  <div id="commonMessage" style="display: inline;">
+  </div>
+</div>
+
+<div id="tweetForm" style="display: none; text-align: right;">
+  <textarea id="status" cols="70" rows="3" onkeydown="countCharsLeft();"
+            onchange="countCharsLeft();" tabindex="1">
+  </textarea>
+  <div>
+    <span id="tweetMessage" tabindex="-1"></span>
+    <span id="charsLeft" tabindex="-1"></span>
+    <a href="#" tabindex="2" id="tweetButton" class="button disabled" onclick="submitTweet();">Tweet</a>
+  </div>
+</div>
+
+<div id="pinForm" style="display: none;">
+  <span style="display: block;">Please enter PIN</span>
+  <input id="pin" type="text" size="7" onkeydown="checkPin();"/>
+  <a href="#" id="pinSubmitButton" onclick="submitPin();" class="button">Submit</a>
+  <a href="#" onclick="authorize();" class="nopin">I don't have PIN</a>
+</div>
+
+</body>
+</html>

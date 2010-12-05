@@ -1,0 +1,32 @@
+{
+  "name": "Twitter share this page",
+  "description": "Share currently viewed page on Twitter. Automatically shortens long URLs if needed.",
+  "version": "2.4",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background_page": "background.html",
+  "icons": { "128": "twittershare-128x128.png" },
+  "page_actions": [
+    {
+      "id": "TweetAction",
+      "name": "Open Twitter with prefilled message",
+      "icons": [
+         "twittershare-16x16.png"
+      ],
+      "default_title": "Click to share on Twitter",
+      "default_icon": "twittershare-16x16.png",
+      "popup": "popup.html" 
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://api.twitter.com/oauth/*"],
+      "js": ["twitter_authorize.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "options.html"
+}

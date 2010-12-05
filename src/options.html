@@ -1,0 +1,46 @@
+<!doctype html>
+<html> 
+<head> 
+<title>TwitterShare Options</title> 
+<link rel="stylesheet" href="options.css" type="text/css"> 
+<script src="options.js" type="text/javascript"></script> 
+</head> 
+ 
+<body onload="init();">
+  <table border="0" class="options-pane"> 
+    <tr> 
+      <td class="icon"> 
+        <img src="twittershare-128x128.png" width="32" height="32"> 
+      </td> 
+      <td width="100%"> 
+        <div class="options-title">TwitterShare Options</div> 
+        <table border="0" class="options-table"> 
+          <tr><td>
+            <input type="checkbox" id="alwaysShortenLinks" checked/>
+                Always shorten links (slower)
+          </td></tr> 
+          <tr><td>
+            <input type="checkbox" id="useExistingTwitterTab"/>
+                Use opened Twitter tab if possible
+          </td></tr> 
+          <tr><td>
+            <input type="checkbox" id="tweetSelection" checked/>
+                Use selected text as tweet body.
+          </td></tr> 
+          <tr><td>
+            <input type="checkbox" id="useTwitterApi" onchange="useTwitterApiChanged();"/>
+            <span>Never open Twitter window, tweet from popup (Twitter API) <font color="red">Experimental!</font></span>
+          </td></tr> 
+        </table> 
+        <div class="close-button"> 
+          <button type="button" onclick="window.close()">Cancel</button> 
+          <button type="button" onclick="saveAndClose()">Save</button> 
+        </div>
+        <div class="feedback-link">
+          <span>If you have suggestions, bugs or anything to say, please leave a message in <a href="http://groups.google.com/group/twittershare/browse_thread/thread/98254054c30fbdae#">"twittershare" Google Group</a>.
+        </div>
+      </td> 
+    </tr> 
+  </table> 
+</body> 
+</html> 
