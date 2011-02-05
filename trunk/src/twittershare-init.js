@@ -37,3 +37,4 @@ chrome.windows.getAll({populate: true}, function(windows) {
   }
 });
 
+setBooleanOption(OPTION_FIRST_RUN, false);

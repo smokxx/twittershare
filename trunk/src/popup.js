@@ -66,6 +66,7 @@ var submitTweet = function() {
   if (!getTweetButtonEnabled()) {
     return;
   }
+  trackEvent('popup', 'submitTweet');
   setTweetFormEnabled(false);
   document.getElementById('charsLeft').innerHTML = '';
   setMessage("Tweeting...");
@@ -105,6 +106,7 @@ var setActiveForm = function(formName) {
 };
 
 var submitPin = function() {
+  trackEvent('popup', 'submitPin');
   if (!isPinGood()) {
     return;
   }
@@ -226,6 +228,7 @@ var prepareAuthorizedTwitterForm = function(tabTitle, url) {
 };
 
 var init = function() {
+  trackPageView();
   var useTwitterApi = getBooleanOption(OPTION_USE_TWITTER_API);
   if (useTwitterApi) {
     if (isAuthorized()) {
