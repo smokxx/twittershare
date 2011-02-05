@@ -48,7 +48,7 @@
     trackEvent('tweetToTab', 'request');
     var details = {};
     details.code = postScriptTemplate.replace(
-        "${newStatus}", status.replace(/"/g, '\\"').replace(/\n/g, '\\n'));
+        "${newStatus}", status.replace(/"/g, '\\"').replace(/\r|\n/g, '\\n'));
     chrome.tabs.executeScript(tab.id, details, function() {
       var updateProperties = {};
       updateProperties.selected = true;
