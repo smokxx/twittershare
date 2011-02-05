@@ -36,7 +36,9 @@
   }
 
   function isTwitterTab(tab) {
-    if (tab.url == 'http://twitter.com/' || tab.url == 'https://twitter.com/') {
+    if (tab.url == 'http://twitter.com/' || tab.url == 'https://twitter.com/'
+        || tab.url.indexOf('http://twitter.com/?status') == 0
+        || tab.url.indexOf('https://twitter.com/?status') == 0) {
       return tab.status != 'loading';
     }
     return false;
@@ -45,7 +47,8 @@
   function postToTwitterTab(tab, status, callback) {
     trackEvent('tweetToTab', 'request');
     var details = {};
-    details.code = postScriptTemplate.replace("${newStatus}", status.replace(/"/g, '\\"'));
+    details.code = postScriptTemplate.replace(
+        "${newStatus}", status.replace(/"/g, '\\"').replace(/\n/g, '\\n'));
     chrome.tabs.executeScript(tab.id, details, function() {
       var updateProperties = {};
       updateProperties.selected = true;
@@ -77,7 +80,7 @@
   }
 
   function openTwitter(status, chromeWindowId, callback) {
-    var url = "https://twitter.com/home?status=" + encodeURIComponent(status);
+    var url = "https://twitter.com/?status=" + encodeURIComponent(status);
     chrome.tabs.getAllInWindow(null, function(tabs) {
       for(var i = 0; i < tabs.length; i++) {
         var tab = tabs[i];
