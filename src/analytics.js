@@ -15,12 +15,12 @@
  */
 
 /*
- * Google Analytics tracking (not used yet).
+ * Google Analytics tracking.
  */
 
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-18723674-1']);
-_gaq.push(['_trackPageview']);
+// _gaq.push(['_trackPageview']);
 
 (function() {
   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -28,3 +28,11 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
+
+var trackPageView = function() {
+  _gaq.push(['_trackPageview']);
+};
+
+var trackEvent = function(category, action, opt_label, opt_value) {
+  _gaq.push(['_trackEvent', action, opt_label, opt_value]);
+};

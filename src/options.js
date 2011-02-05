@@ -24,12 +24,14 @@ var DATA_OAUTH_TOKEN_SECRET = "oauth_token_secret";
 var DATA_AUTHORIZED = "authorized";
 var DATA_PIN_REQUESTED = "pin_requested";
 
+var OPTION_FIRST_RUN = "firstRun";
 var OPTION_SHORTEN_LINKS = "alwaysShortenLinks";
 var OPTION_USE_TWITTER_TAB = "useExistingTwitterTab";
 var OPTION_USE_TWITTER_API = "useTwitterApi";
 var OPTION_TWEET_SELECTION = "tweetSelection";
 
 var defaults = {};
+defaults[OPTION_FIRST_RUN] = "false";
 defaults[OPTION_SHORTEN_LINKS] = "false";
 defaults[OPTION_USE_TWITTER_TAB] = "true";
 defaults[OPTION_USE_TWITTER_API] = "false";
@@ -64,7 +66,12 @@ function updateCheckboxOption(optionName) {
   document.getElementById(optionName).checked = getBooleanOption(optionName) ? 'checked' : '';
 }
 
+
+// Used only on Options page.
 function init() {
+  // Report pageview to Google Analytics.
+  trackPageView();
+
   updateCheckboxOption(OPTION_SHORTEN_LINKS);
   updateCheckboxOption(OPTION_USE_TWITTER_TAB);
   updateCheckboxOption(OPTION_TWEET_SELECTION);

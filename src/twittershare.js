@@ -43,17 +43,20 @@
   }
 
   function postToTwitterTab(tab, status, callback) {
+    trackEvent('tweetToTab', 'request');
     var details = {};
     details.code = postScriptTemplate.replace("${newStatus}", status.replace(/"/g, '\\"'));
     chrome.tabs.executeScript(tab.id, details, function() {
       var updateProperties = {};
       updateProperties.selected = true;
       chrome.tabs.update(tab.id, updateProperties);
+      trackEvent('tweetToTab', 'success');
       respond(callback, true);
     });
   }
 
   function tweetFromApi(status, callback) {
+    trackEvent('tweetApi', 'request');
     if (getBooleanOption('authorized')) {
       var params = {
           'oauth_token': getStringOption(DATA_OAUTH_TOKEN),
@@ -63,7 +66,9 @@
       AuthHelper.makeApiRequest('https://api.twitter.com/1/statuses/update.json', params,
           function (response) {
         console.log("Update: " + response);
-        respond(callback, response.status == 200, response);
+        var success = (response.status == 200);
+        trackEvent('tweetApi', success ? 'success' : 'error');
+        respond(callback, success, response);
       });
     } else {
       // Should not happen actually.
@@ -81,6 +86,7 @@
           return;
         }
       }
+      trackEvent('tweetNewTab', 'request');
       chrome.tabs.create({url: url, windowId: chromeWindowId});
       respond(callback, true);
     });
@@ -103,15 +109,21 @@
   }
   
   function authorize(callback) {
+    trackEvent('twitterAuthorize', 'request');
     // get request token and open twitter with permissions question.
     AuthHelper.getRequestToken(function(oauthResponse) {
-      respond(callback, oauthResponse.status == 'SUCCESS', oauthResponse.obj);
+      var success = (oauthResponse.status == 'SUCCESS');
+      trackEvent('twitterAuthorize', success ? 'success' : 'error');
+      respond(callback, success, oauthResponse.obj);
     });
   }
 
   function getAccessToken(pin, callback) {
+    trackEvent('twitterGetAccessToken', 'request');
     AuthHelper.getAccessToken(pin, function(oauthResponse) {
-      respond(callback, oauthResponse.status == 'SUCCESS', oauthResponse.obj);
+      var success = (oauthResponse.status == 'SUCCESS');
+      trackEvent('twitterGetAccessToken', success ? 'success' : 'error');
+      respond(callback, success, oauthResponse.obj);
     });
   }
 
