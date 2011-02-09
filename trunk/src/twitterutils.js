@@ -18,7 +18,8 @@
 
 var TwitterUtils = TwitterUtils || {};
 
-TwitterUtils.URL_SCRIPTS_DISALLOWED = 'https://chrome.google.com/extensions/';
+TwitterUtils.URL_SCRIPTS_DISALLOWED =
+    'https://chrome.google.com/extensions/|https://chrome.google.com/webstore';
 
 // Maximum length of shortened URL.
 TwitterUtils.SHORTENED_URL_MAX_LENGTH = 22;

@@ -34,5 +34,5 @@ var trackPageView = function() {
 };
 
 var trackEvent = function(category, action, opt_label, opt_value) {
-  _gaq.push(['_trackEvent', action, opt_label, opt_value]);
+  _gaq.push(['_trackEvent', category, action, opt_label, opt_value]);
 };
