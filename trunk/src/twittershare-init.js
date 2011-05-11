@@ -37,4 +37,9 @@ chrome.windows.getAll({populate: true}, function(windows) {
   }
 });
 
-setBooleanOption(OPTION_FIRST_RUN, false);
+// Enable Twitter API sharing and always-shortening for users who just installed the app.
+if (getBooleanOption(OPTION_FIRST_RUN)) {
+  setBooleanOption(OPTION_USE_TWITTER_API, true);
+  setBooleanOption(OPTION_SHORTEN_LINKS, true);
+  setBooleanOption(OPTION_FIRST_RUN, false);
+}
