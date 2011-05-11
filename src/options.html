@@ -21,16 +21,16 @@
                 Always shorten links (slower)
           </td></tr> 
           <tr><td>
-            <input type="checkbox" id="useExistingTwitterTab"/>
-                Use opened Twitter tab if possible
-          </td></tr> 
-          <tr><td>
             <input type="checkbox" id="tweetSelection" checked/>
                 Use selected text as tweet body.
           </td></tr> 
           <tr><td>
             <input type="checkbox" id="useTwitterApi" onchange="useTwitterApiChanged();"/>
-            <span>Never open Twitter window, tweet from popup (Twitter API) <font color="red">Experimental!</font></span>
+            <span>Use Twitter API to tweet (otherwise opens new Twitter tab with filled status)</span>
+          </td></tr> 
+          <tr><td style="padding-left: 1em;">
+            <input type="checkbox" id="useExistingTwitterTab"/>
+                Use opened Twitter tab if possible
           </td></tr> 
         </table> 
         <div class="close-button"> 

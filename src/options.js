@@ -31,7 +31,7 @@ var OPTION_USE_TWITTER_API = "useTwitterApi";
 var OPTION_TWEET_SELECTION = "tweetSelection";
 
 var defaults = {};
-defaults[OPTION_FIRST_RUN] = "false";
+defaults[OPTION_FIRST_RUN] = "true";
 defaults[OPTION_SHORTEN_LINKS] = "false";
 defaults[OPTION_USE_TWITTER_TAB] = "true";
 defaults[OPTION_USE_TWITTER_API] = "false";
