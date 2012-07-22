@@ -217,7 +217,7 @@ var prepareAuthorizedTwitterForm = function(tabTitle, url) {
         } else {
           setTweetField(TwitterUtils.composeTweet(statusBody, url));
           setTweetFormEnabled(true);
-          setMessage('Error: ' + shortenResponse.obj.error);
+          setMessage(shortenResponse.obj.error);
         };
       });
     } else {
