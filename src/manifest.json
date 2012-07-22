@@ -1,7 +1,7 @@
 {
   "name": "Twitter share this page",
   "description": "Share currently viewed page on Twitter. Automatically shortens long URLs if needed.",
-  "version": "2.7",
+  "version": "2.8",
   "permissions": [
     "tabs",
     "http://*/*",

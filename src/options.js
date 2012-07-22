@@ -29,6 +29,7 @@ var OPTION_SHORTEN_LINKS = "alwaysShortenLinks";
 var OPTION_USE_TWITTER_TAB = "useExistingTwitterTab";
 var OPTION_USE_TWITTER_API = "useTwitterApi";
 var OPTION_TWEET_SELECTION = "tweetSelection";
+var OPTION_BITLY_KEY = "bitlyKey";
 
 var defaults = {};
 defaults[OPTION_FIRST_RUN] = "true";
@@ -36,6 +37,7 @@ defaults[OPTION_SHORTEN_LINKS] = "false";
 defaults[OPTION_USE_TWITTER_TAB] = "true";
 defaults[OPTION_USE_TWITTER_API] = "false";
 defaults[OPTION_TWEET_SELECTION] = "true";
+defaults[OPTION_BITLY_KEY] = "";
 
 function setStringOption(name, value) {
   localStorage[name] = value;
@@ -66,6 +68,9 @@ function updateCheckboxOption(optionName) {
   document.getElementById(optionName).checked = getBooleanOption(optionName) ? 'checked' : '';
 }
 
+function updateStringOption(optionName) {
+  document.getElementById(optionName).value = getStringOption(optionName);
+}
 
 // Used only on Options page.
 function init() {
@@ -76,6 +81,7 @@ function init() {
   updateCheckboxOption(OPTION_USE_TWITTER_TAB);
   updateCheckboxOption(OPTION_TWEET_SELECTION);
   updateCheckboxOption(OPTION_USE_TWITTER_API);
+  updateStringOption(OPTION_BITLY_KEY);
   useTwitterApiChanged();
 }
 
@@ -84,6 +90,7 @@ function saveAndClose() {
   setBooleanOption(OPTION_USE_TWITTER_TAB, document.getElementById(OPTION_USE_TWITTER_TAB).checked);
   setBooleanOption(OPTION_TWEET_SELECTION, document.getElementById(OPTION_TWEET_SELECTION).checked);
   setBooleanOption(OPTION_USE_TWITTER_API, document.getElementById(OPTION_USE_TWITTER_API).checked);
+  setStringOption(OPTION_BITLY_KEY, document.getElementById(OPTION_BITLY_KEY).value);
   window.close();
 }
 

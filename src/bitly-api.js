@@ -274,7 +274,7 @@ Generic API caller for more advanced API usage. Allows you to specify extra para
 */
 BitlyApiClient.prototype.call = function(method, params, callback_method_name, response_format) {
 params['login'] = this.login;
-params['apiKey'] = this.apiKey;
+params['apiKey'] = getStringOption(OPTION_BITLY_KEY) || this.apiKey;
 if(response_format && response_format === "v3") {
 return BitlyApi.call(method, params, callback_method_name);
 }

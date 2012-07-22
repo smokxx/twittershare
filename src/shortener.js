@@ -34,13 +34,13 @@ BitlyCB.shortenResponse = function(data) {
     result['longUrl'] = r;
     break;
   }
-  var shortUrlResult = result['shortUrl'];
+  var shortUrlResult = result && result['shortUrl'];
   if (!!shortUrlResult) {
     var shortenedUrl = shortUrlResult.toString();
     Shortener.shortenedCache[result['longUrl']] = shortenedUrl;
     Shortener.shortenData.callback({'status': 'SUCCESS', 'obj': {'shortUrl': shortenedUrl}});
   } else {
-    Shortener.shortenData.callback({'status': 'ERROR', 'obj': {'error': 'Shorten error'}});
+    Shortener.shortenData.callback({'status': 'ERROR', 'obj': {'error': 'Shorten error, status code: ' + data.statusCode}});
   }
 };
 
