@@ -273,7 +273,7 @@ e.style.display = 'none';
 Generic API caller for more advanced API usage. Allows you to specify extra params for method calls with options. Eg, you can call the /info API and ask for a subset of data using the 'keys' param.
 */
 BitlyApiClient.prototype.call = function(method, params, callback_method_name, response_format) {
-params['login'] = this.login;
+params['login'] = getStringOption(OPTION_BITLY_LOGIN) || this.login;
 params['apiKey'] = getStringOption(OPTION_BITLY_KEY) || this.apiKey;
 if(response_format && response_format === "v3") {
 return BitlyApi.call(method, params, callback_method_name);
