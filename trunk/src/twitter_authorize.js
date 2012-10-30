@@ -82,7 +82,7 @@ var authorize = function() {
   }
   
   authorizeStarted = true;
-  var message = 'Authorizing "Twitter share this page" extension';
+  var message = 'Authorizing "Tweet this page" extension';
   setMessage(message);
   startProgress();
 

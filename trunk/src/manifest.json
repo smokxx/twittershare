@@ -1,7 +1,7 @@
 {
-  "name": "Twitter share this page",
+  "name": "Tweet this page",
   "description": "Share currently viewed page on Twitter. Automatically shortens long URLs if needed.",
-  "version": "2.9",
+  "version": "2.11",
   "permissions": [
     "tabs",
     "http://*/*",
@@ -14,10 +14,10 @@
       "id": "TweetAction",
       "name": "Open Twitter with prefilled message",
       "icons": [
-         "twittershare-16x16.png"
+         "twitter-bird-38x38.png"
       ],
       "default_title": "Click to share on Twitter",
-      "default_icon": "twittershare-16x16.png",
+      "default_icon": "twitter-bird-38x38.png",
       "popup": "popup.html" 
     }
   ],

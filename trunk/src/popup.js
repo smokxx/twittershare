@@ -248,3 +248,13 @@ var init = function() {
     chrome.tabs.getSelected(null, tweetFromTab);
   }
 };
+
+document.addEventListener('DOMContentLoaded', function () {
+  init();
+  document.querySelector('#tweetButton').addEventListener('click', submitTweet);
+  document.querySelector('#pinSubmitButton').addEventListener('click', submitPin);
+  document.querySelector('#authorizeButton').addEventListener('click', authorize);
+  document.querySelector('#status').addEventListener('keydown', countCharsLeft);
+  document.querySelector('#status').addEventListener('change', countCharsLeft);
+  document.querySelector('#pin').addEventListener('keydown', checkPin);
+});
