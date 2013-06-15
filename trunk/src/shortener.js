@@ -23,32 +23,22 @@ var Shortener = {};
 // Cache for shortened earlier URLs (map longUrl->shortUrl).
 Shortener.shortenedCache = [];
 
-// {callback, longUrl}
-Shortener.shortenData = {};
-
-BitlyCB.shortenResponse = function(data) {
-  var result;
-  // Results are keyed by longUrl, so we need to grab the first one.
-  for (var r in data.results) {
-    result = data.results[r];
-    result['longUrl'] = r;
-    break;
-  }
-  var shortUrlResult = result && result['shortUrl'];
-  if (!!shortUrlResult) {
-    var shortenedUrl = shortUrlResult.toString();
-    Shortener.shortenedCache[result['longUrl']] = shortenedUrl;
-    Shortener.shortenData.callback({'status': 'SUCCESS', 'obj': {'shortUrl': shortenedUrl}});
-  } else {
-    Shortener.shortenData.callback({'status': 'ERROR', 'obj': {'error': 'Shorten error, status code: ' + data.statusCode}});
-  }
-};
-
 Shortener.shorten = function(url, callback) {
   if (!!Shortener.shortenedCache[url]) {
     callback({'status': 'SUCCESS', 'obj': {'shortUrl': Shortener.shortenedCache[url]}});
   } else {
-    Shortener.shortenData.callback = callback;
-    BitlyClient.shorten(url, 'BitlyCB.shortenResponse');
+    var login = getStringOption(OPTION_BITLY_LOGIN) || "twittershare";
+    var apiKey = getStringOption(OPTION_BITLY_KEY) || "R_211fd6da0432008dc0f4a7cdbec19f91";
+    $.getJSON("https://api-ssl.bitly.com/v3/shorten?callback=?",
+        { "format": "json", "apiKey": apiKey, "login": login, "longUrl": url },
+        function(response) {
+          if (response.status_code == 200) {
+            Shortener.shortenedCache[url] = response.data.url;
+            callback({'status': 'SUCCESS', 'obj': {'shortUrl': response.data.url}});
+          } else {
+            callback({'status': 'ERROR', 'obj': {'error': 'Shorten error, status code: ' + response.status_code}});
+          }
+        }
+    );
   }
 };

@@ -66,7 +66,7 @@
           'oauth_token_secret': getStringOption(DATA_OAUTH_TOKEN_SECRET),
           'status': status
       };
-      AuthHelper.makeApiRequest('https://api.twitter.com/1/statuses/update.json', params,
+      AuthHelper.makeApiRequest('https://api.twitter.com/1.1/statuses/update.json', params,
           function (response) {
         console.log("Update: " + response);
         var success = (response.status == 200);

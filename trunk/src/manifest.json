@@ -2,29 +2,27 @@
   "name": "Tweet this page",
   "description": "Share currently viewed page on Twitter. Automatically shortens long URLs if needed.",
   "version": "2.11",
+  "manifest_version": 2,
   "permissions": [
     "tabs",
     "http://*/*",
     "https://*/*"
   ],
-  "background_page": "background.html",
+  "background": {
+    "scripts": [ "jquery-2.0.2.min.js", "options.js", "analytics.js", "sha1.js", "oauth.js", "authhelper.js", "shortener.js", "twitterutils.js", "twittershare.js", "twittershare-init.js" ]
+  },
+  "content_security_policy": "script-src 'self' https://api-ssl.bitly.com https://ssl.google-analytics.com; object-src 'self'",
   "icons": { "128": "twittershare-128x128.png" },
-  "page_actions": [
-    {
-      "id": "TweetAction",
-      "name": "Open Twitter with prefilled message",
-      "icons": [
-         "twitter-bird-38x38.png"
-      ],
-      "default_title": "Click to share on Twitter",
-      "default_icon": "twitter-bird-38x38.png",
-      "popup": "popup.html" 
-    }
-  ],
+  "page_action": {
+    "name": "Open Twitter with prefilled message",
+    "default_title": "Click to share on Twitter",
+    "default_icon": "twitter-bird-38x38.png",
+    "default_popup": "popup.html" 
+  },
   "content_scripts": [
     {
-      "matches": ["https://api.twitter.com/oauth/*"],
-      "js": ["twitter_authorize.js"],
+      "matches": [ "https://api.twitter.com/oauth/*" ],
+      "js": [ "twitter_authorize.js" ],
       "run_at": "document_end"
     }
   ],
