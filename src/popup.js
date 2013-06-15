@@ -81,7 +81,7 @@ var submitTweet = function() {
           setMessage('Authorization error. Redirecting to Twitter access page.');
           setTimeout(function() {authorize();}, 3000);
         } else {
-          setMessage('Error: ' + response.obj.obj.error);
+          setMessage('Error: ' + response.obj.error);
           setTweetFormEnabled(true);
         }
       });

@@ -57,22 +57,35 @@
       respond(callback, true);
     });
   }
+  
+  function makeResponseObject(reply) {
+    var success = (reply.httpstatus == 200);
+    trackEvent('tweetApi', success ? 'success' : 'error');
+    var result = {};
+    result.status = reply.httpstatus;
+    if (success) {
+      return result;
+    }
+    if (reply.errors && reply.errors.length > 0) {
+      var error = reply.errors[0];
+      result.error = "Code: " + error.code + ", " + error.message;
+    } else {
+      result.error = 'Unknown';
+    }
+    return result;
+  }
 
   function tweetFromApi(status, callback) {
     trackEvent('tweetApi', 'request');
     if (getBooleanOption('authorized')) {
-      var params = {
-          'oauth_token': getStringOption(DATA_OAUTH_TOKEN),
-          'oauth_token_secret': getStringOption(DATA_OAUTH_TOKEN_SECRET),
-          'status': status
-      };
-      AuthHelper.makeApiRequest('https://api.twitter.com/1.1/statuses/update.json', params,
-          function (response) {
-        console.log("Update: " + response);
-        var success = (response.status == 200);
-        trackEvent('tweetApi', success ? 'success' : 'error');
-        respond(callback, success, response);
-      });
+      cb.setToken(getStringOption(DATA_OAUTH_TOKEN), getStringOption(DATA_OAUTH_TOKEN_SECRET));
+      cb.__call('statuses_update', {'status': status},
+        function (reply) {
+          var success = (reply.httpstatus == 200);
+          trackEvent('tweetApi', success ? 'success' : 'error');
+          respond(callback, success, makeResponseObject(reply));
+        }
+      );
     } else {
       // Should not happen actually.
       authorize(response);
