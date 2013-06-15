@@ -43,3 +43,6 @@ if (getBooleanOption(OPTION_FIRST_RUN)) {
   setBooleanOption(OPTION_SHORTEN_LINKS, true);
   setBooleanOption(OPTION_FIRST_RUN, false);
 }
+
+var cb = new Codebird;
+cb.setConsumerKey(CONSUMER_KEY, CONSUMER_SECRET_KEY);

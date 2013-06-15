@@ -9,7 +9,7 @@
     "https://*/*"
   ],
   "background": {
-    "scripts": [ "jquery-2.0.2.min.js", "options.js", "analytics.js", "sha1.js", "oauth.js", "authhelper.js", "shortener.js", "twitterutils.js", "twittershare.js", "twittershare-init.js" ]
+    "scripts": [ "codebird.js", "jquery-2.0.2.min.js", "options.js", "analytics.js", "sha1.js", "oauth.js", "authhelper.js", "shortener.js", "twitterutils.js", "twittershare.js", "twittershare-init.js" ]
   },
   "content_security_policy": "script-src 'self' https://api-ssl.bitly.com https://ssl.google-analytics.com; object-src 'self'",
   "icons": { "128": "twittershare-128x128.png" },
