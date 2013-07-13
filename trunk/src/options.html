@@ -5,9 +5,10 @@
 <link rel="stylesheet" href="options.css" type="text/css"> 
 <script type="text/javascript" src="analytics.js"></script>
 <script type="text/javascript" src="options.js"></script> 
+<script type="text/javascript" src="options_page.js"></script> 
 </head> 
  
-<body onload="init();">
+<body>
   <table border="0" class="options-pane"> 
     <tr> 
       <td class="icon"> 
@@ -25,7 +26,7 @@
                 Use selected text as tweet body.
           </td></tr> 
           <tr><td>
-            <input type="checkbox" id="useTwitterApi" onchange="useTwitterApiChanged();"/>
+            <input type="checkbox" id="useTwitterApi"/>
             <span>Use Twitter API to tweet (otherwise opens new Twitter tab with filled status)</span>
           </td></tr> 
           <tr><td style="padding-left: 1em;">
@@ -52,8 +53,8 @@
           </tr></td>
         </table> 
         <div class="close-button"> 
-          <button type="button" onclick="window.close()">Cancel</button> 
-          <button type="button" onclick="saveAndClose()">Save</button> 
+          <button type="button" id="cancelButton">Cancel</button> 
+          <button type="button" id="saveButton">Save</button> 
         </div>
         <div class="feedback-link">
           <span>If you have suggestions, bugs or anything to say, please leave a message in <a href="http://groups.google.com/group/twittershare/browse_thread/thread/98254054c30fbdae#">"twittershare" Google Group</a>.

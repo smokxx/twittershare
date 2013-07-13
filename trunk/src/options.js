@@ -73,37 +73,3 @@ function updateCheckboxOption(optionName) {
 function updateStringOption(optionName) {
   document.getElementById(optionName).value = getStringOption(optionName);
 }
-
-// Used only on Options page.
-function init() {
-  // Report pageview to Google Analytics.
-  trackPageView();
-
-  updateCheckboxOption(OPTION_SHORTEN_LINKS);
-  updateCheckboxOption(OPTION_USE_TWITTER_TAB);
-  updateCheckboxOption(OPTION_TWEET_SELECTION);
-  updateCheckboxOption(OPTION_USE_TWITTER_API);
-  updateStringOption(OPTION_BITLY_LOGIN);
-  updateStringOption(OPTION_BITLY_KEY);
-  useTwitterApiChanged();
-}
-
-function saveAndClose() {
-  var bitlyLogin = document.getElementById(OPTION_BITLY_LOGIN).value.trim();
-  var bitlyKey = document.getElementById(OPTION_BITLY_KEY).value.trim();
-  if (!!bitlyLogin ^ !!bitlyKey) {
-    alert('Both bit.ly login and key must be set or both cleared');
-    return;
-  }
-  setBooleanOption(OPTION_SHORTEN_LINKS, document.getElementById(OPTION_SHORTEN_LINKS).checked);
-  setBooleanOption(OPTION_USE_TWITTER_TAB, document.getElementById(OPTION_USE_TWITTER_TAB).checked);
-  setBooleanOption(OPTION_TWEET_SELECTION, document.getElementById(OPTION_TWEET_SELECTION).checked);
-  setBooleanOption(OPTION_USE_TWITTER_API, document.getElementById(OPTION_USE_TWITTER_API).checked);
-  setStringOption(OPTION_BITLY_LOGIN, bitlyLogin);
-  setStringOption(OPTION_BITLY_KEY, bitlyKey);
-  window.close();
-}
-
-function useTwitterApiChanged() {
-  document.getElementById(OPTION_USE_TWITTER_TAB).disabled = document.getElementById(OPTION_USE_TWITTER_API).checked;
-}
